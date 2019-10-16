@@ -1,0 +1,14 @@
+{
+  "name": "config",
+  "version": "1.0.0",
+  "description": "All env configurations of Gora proyect",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "@edlugora",
+  "license": "MIT",
+  "dependencies": {}
+}

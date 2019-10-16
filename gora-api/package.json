@@ -1,0 +1,22 @@
+{
+  "name": "gora-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/boom": "^7.4.3",
+    "chalk": "^2.4.2",
+    "config": "file:../config",
+    "express": "^4.17.1",
+    "gora-utils": "file:../gora-utils",
+    "video-thumbnail-generator": "^1.1.3",
+    "ytdl-core": "^1.0.0"
+  },
+  "devDependencies": {}
+}

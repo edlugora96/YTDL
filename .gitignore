@@ -109,6 +109,7 @@ $RECYCLE.BIN/
 # Others
 lib/
 data/
+uploads/
 
 .jpg
 .jpeg

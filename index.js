@@ -26,7 +26,7 @@ app.use(helmet());
 // body parser
 app.use(express.json());
 
-app.use("/media", express.static(path.resolve("./uploads")));
+app.use("/", express.static(path.resolve("uploads")));
 
 // Loading APIs
 ytdlApi(app);

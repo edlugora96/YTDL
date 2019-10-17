@@ -5,7 +5,7 @@ const helmet = require("helmet");
 const cors = require("cors");
 const next = require("next");
 const timeout = require("connect-timeout");
-
+const { startIO } = require("./socket.js");
 const { ytdlApi } = require("gora-api");
 const {
   middlewares: {
@@ -25,6 +25,9 @@ nextCli
   .prepare()
   .then(() => {
     const app = express();
+
+    // start socket IO
+    startIO(app);
 
     app.use(timeout(3600 * 24 * 7));
     // Security

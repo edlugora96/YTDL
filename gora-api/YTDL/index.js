@@ -3,6 +3,7 @@ const path = require("path");
 const express = require("express");
 const config = require("config")();
 const ytdl = require("ytdl-core");
+const { socket } = require("../socket.js");
 var ffmpeg = require("ffmpeg");
 const ThumbnailGenerator = require("video-thumbnail-generator").default;
 let thumbs = [];
@@ -46,8 +47,9 @@ const ytdlApi = app => {
               })
               .then(th => {
                 thumbs.push(th);
-                res.status(200).send({ ...data, thumbs });
+                socket.io.emit("video_loaded", { ...data, thumbs });
               });
+            res.status(200).send({ ...data, thumbs });
           }
         })
         .pipe(await fs.createWriteStream(`uploads/${data.name}.mp4`));

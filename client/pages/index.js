@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useInputValue } from "$utils/hooks";
+import { subscribeVideoLoaded } from "$utils/socket";
 import Link from "next/link";
 import fetch from "isomorphic-unfetch";
 import connect from "$redux/connect";
@@ -15,8 +16,6 @@ const send = (data, props) => {
     },
     body: JSON.stringify(data)
   }).then(r => {
-    props.setVideoInfo(r);
-    props.setLoading(false);
     console.log(r);
   });
 };
@@ -25,6 +24,12 @@ const Home = props => {
   const url = useInputValue();
   const name = useInputValue();
   const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    subscribeVideoLoaded((err, data) => {
+      props.setVideoInfo(data);
+      props.setLoading(false);
+    });
+  }, []);
   if (loading) {
     return <h1>Loading...</h1>;
   }
@@ -52,8 +57,6 @@ const Home = props => {
               onChange={name.onChange}
             />
           </label>
-          <br />
-          <br />
           <Button
             primary={true}
             onClick={() =>

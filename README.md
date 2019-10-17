@@ -41,7 +41,7 @@ To deploy in Heroku you have to add the ffmpeg buildpack:
 heroku buildpacks: add https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git -a HERE_YOUR_APP
 ```
 
-### To do list:
+##To do list:
 
 - Organize the index.js page in components
 - Add error handling to the form

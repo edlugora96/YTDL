@@ -5,6 +5,7 @@ const config = require("config")();
 const ytdl = require("ytdl-core");
 var ffmpeg = require("ffmpeg");
 const ThumbnailGenerator = require("video-thumbnail-generator").default;
+let thumbs = [];
 
 const ytdlApi = app => {
   const router = express.Router();
@@ -16,7 +17,7 @@ const ytdlApi = app => {
       await ytdl(data.url, {
         quality: "highest"
       })
-        .on("progress", (length, downloaded, totallength) => {
+        .on("progress", async (length, downloaded, totallength) => {
           console.log({ length, downloaded, totallength });
           if (downloaded === totallength) {
             const tg = new ThumbnailGenerator({
@@ -26,23 +27,28 @@ const ytdlApi = app => {
               ),
               thumbnailPath: path.join(__dirname, "../../uploads/thumbs/")
             });
-            tg.generateOneByPercent(10, {
-              size: "100%",
-              filename: `${data.name}_1`
-            }).then(console.log);
-            tg.generateOneByPercent(50, {
-              size: "100%",
-              filename: `${data.name}_2`
-            }).then(console.log);
-            tg.generateOneByPercent(90, {
-              size: "100%",
-              filename: `${data.name}_3`
-            }).then(console.log);
+            await tg
+              .generateOneByPercent(10, {
+                size: "100%",
+                filename: `${data.name}_1`
+              })
+              .then(th => thumbs.push(th));
+            await tg
+              .generateOneByPercent(50, {
+                size: "100%",
+                filename: `${data.name}_2`
+              })
+              .then(th => thumbs.push(th));
+            await tg
+              .generateOneByPercent(90, {
+                size: "100%",
+                filename: `${data.name}_3`
+              })
+              .then(th => thumbs.push(th));
           }
+          res.status(200).send({ ...data, thumbs });
         })
         .pipe(await fs.createWriteStream(`uploads/${data.name}.mp4`));
-
-      res.status(200).send({ data });
     } catch (err) {
       next(err);
     }

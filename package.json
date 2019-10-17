@@ -4,16 +4,24 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "set DEBUG=app:* && nodemon index",
+    "dev": "set DEBUG=app:* && node index",
+    "prestart": "next build ./client",
     "start": "set NODE_ENV=production && node index"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@zeit/next-css": "^1.0.1",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
     "nodemon": "^1.19.2"
   },
   "dependencies": {
+    "@material-ui/core": "^4.5.1",
+    "@material-ui/icons": "^4.5.1",
     "chalk": "^2.4.2",
     "config": "file:./config",
     "cors": "^2.8.5",
@@ -22,6 +30,20 @@
     "ffmpeg": "0.0.4",
     "gora-api": "file:./gora-api",
     "gora-utils": "file:./gora-utils",
-    "helmet": "^3.21.0"
+    "helmet": "^3.21.0",
+    "isomorphic-unfetch": "^3.0.0",
+    "next": "^9.1.1",
+    "next-redux-wrapper": "^4.0.1",
+    "react": "^16.10.2",
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-dom": "^16.10.2",
+    "react-redux": "^7.1.1",
+    "redux": "^4.0.4",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-starter-kit": "^0.8.1",
+    "redux-thunk": "^2.3.0"
+  },
+  "engines": {
+    "node": "12.x"
   }
 }

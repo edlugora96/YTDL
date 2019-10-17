@@ -1,0 +1,25 @@
+{
+  "presets": [
+    "next/babel"
+  ],
+  "plugins": [
+    ["module-resolver", {
+      "root": ["./"],
+      "alias": {
+        "$components": "./client/components",
+        "$pages": "./client/pages",
+        "$img": "./client/static/img",
+        "$styles": "./client/assets/css",
+        "$utils": "./client/assets/js",
+        "$react": "./client/components",
+        "$db": "./client/assets/db",
+        "$fonts": "./client/assets/fonts",
+        "$assets": "./client/assets",
+        "$static": "./client/static",
+        "$redux": "./client/assets/redux",
+        "$root": "./client/",
+        "underscore": "lodash"
+      }
+    }]
+  ]
+}

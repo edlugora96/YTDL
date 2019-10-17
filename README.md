@@ -25,12 +25,12 @@ https://www.ffmpeg.org/
 ```
 $ git clone https://github.com/edlugora96/YTDL
 
-cd YTDL
+$ cd YTDL
 // Dev
-npm run dev
+$ npm run dev
 
 // Production
-npm run start
+$ npm run start
 ```
 
 ### Heroku
@@ -38,7 +38,7 @@ npm run start
 To deploy in Heroku you have to add the ffmpeg buildpack:
 
 ```
-heroku buildpacks: add https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git -a HERE_YOUR_APP
+$ heroku buildpacks: add https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git -a HERE_YOUR_APP
 ```
 
 ## To do list:

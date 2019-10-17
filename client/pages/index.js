@@ -31,9 +31,7 @@ const send = (data, props) => {
       "Content-Type": "application/json"
     },
     body: JSON.stringify(data)
-  }).then(r => {
-    console.log(r);
-  });
+  }).then(r => {});
 };
 
 const Home = props => {
@@ -43,12 +41,10 @@ const Home = props => {
   const [loadingValue, setLoadingValue] = useState(0);
   useEffect(() => {
     subscribeVideoLoaded((err, data) => {
-      console.log(data);
       props.setVideoInfo(data);
       setLoading(false);
     });
     subscribeChumkVideoLoaded((err, data) => {
-      console.log(data);
       setLoadingValue((data.downloaded * 100) / data.totallength);
     });
   }, []);

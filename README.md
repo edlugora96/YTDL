@@ -15,6 +15,10 @@
 - Redux with Redux-starter-kit (already includes redux-thunk)
 - Material UI
 
+## Demo:
+
+https://www.youtube.com/watch?v=WTqTw2de0bI
+
 ## Instructions to run the application:
 
 ### local:

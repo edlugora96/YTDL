@@ -44,9 +44,11 @@ const ytdlApi = app => {
                 size: "100%",
                 filename: `${data.name}_3`
               })
-              .then(th => thumbs.push(th));
+              .then(th => {
+                thumbs.push(th);
+                res.status(200).send({ ...data, thumbs });
+              });
           }
-          res.status(200).send({ ...data, thumbs });
         })
         .pipe(await fs.createWriteStream(`uploads/${data.name}.mp4`));
     } catch (err) {

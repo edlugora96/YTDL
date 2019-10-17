@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "set DEBUG=app:* && nodemon index",
     "prestart": "next build ./client",
-    "start": "NODE_ENV=production node index"
+    "start": "NODE_ENV=production node index",
+    "start:local": "set NODE_ENV=production && node index"
   },
   "keywords": [],
   "author": "",

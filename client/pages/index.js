@@ -35,14 +35,17 @@ const Home = props => {
           <h3>Donwload video from Youtube</h3>
           <label>
             Youtube Url
+           <br>
             <TextField
               id="YoutubeUrl"
               value={url.value}
               onChange={url.onChange}
             />
           </label>
+          <br>
           <label>
             Name of video
+            <br>
             <TextField
               id="YoutubeName"
               value={name.value}

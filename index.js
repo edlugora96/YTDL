@@ -56,7 +56,7 @@ nextCli
     app.use(wrapErrors);
     app.use(errorHandler);
 
-    http.listen(config.port, config.host, () => {
+    http.listen(config.port, () => {
       // eslint-disable-next-line
       console.log(
         `${chalk.blueBright("[server On]:")} Listening http://${config.host}:${

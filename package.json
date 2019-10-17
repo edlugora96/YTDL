@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "set DEBUG=app:* && node index",
+    "dev": "set DEBUG=app:* && nodemon index",
     "prestart": "next build ./client",
     "start": "NODE_ENV=production node index"
   },

@@ -14,12 +14,13 @@ const ytdlApi = app => {
 
   router.post("/", async (req, res, next) => {
     const { body: data } = req;
+    thumbs = [];
     try {
       await ytdl(data.url, {
         quality: "highest"
       })
         .on("progress", async (length, downloaded, totallength) => {
-          console.log({ length, downloaded, totallength });
+          socket.io.emit("chunk_video", { length, downloaded, totallength });
           if (downloaded === totallength) {
             const tg = new ThumbnailGenerator({
               sourcePath: path.join(

@@ -27,7 +27,7 @@ nextCli
     const app = express();
 
     // start socket IO
-    startIO(app);
+    const http = startIO(app);
 
     app.use(timeout(3600 * 24 * 7));
     // Security
@@ -56,7 +56,7 @@ nextCli
     app.use(wrapErrors);
     app.use(errorHandler);
 
-    app.listen(config.port, config.host, () => {
+    http.listen(config.port, config.host, () => {
       // eslint-disable-next-line
       console.log(
         `${chalk.blueBright("[server On]:")} Listening http://${config.host}:${
@@ -64,6 +64,7 @@ nextCli
         }`
       );
     });
+
     const handleFatalError = error => {
       // eslint-disable-next-line
       console.error(`${chalk.redBright("[Fatal Error]:")} ${error.message}`);

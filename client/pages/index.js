@@ -1,14 +1,30 @@
 import { useState, useEffect } from "react";
 import { useInputValue } from "$utils/hooks";
-import { subscribeVideoLoaded } from "$utils/socket";
+import { subscribeVideoLoaded, subscribeChumkVideoLoaded } from "$utils/socket";
 import Link from "next/link";
 import fetch from "isomorphic-unfetch";
 import connect from "$redux/connect";
-import { GridList, GridListTile, Button } from "@material-ui/core";
-import { TextField } from "@material-ui/core";
+import {
+  Grid,
+  GridList,
+  GridListTile,
+  Button,
+  Typography,
+  TextField,
+  Box
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import LinearProgress from "@material-ui/core/LinearProgress";
+
+const useStyles = makeStyles({
+  root: {
+    flexGrow: 1
+  }
+});
 
 const send = (data, props) => {
   props.setLoading(true);
+  props.setVideoInfo(null);
   fetch("/api/ytdl", {
     method: "POST",
     headers: {
@@ -24,73 +40,116 @@ const Home = props => {
   const url = useInputValue();
   const name = useInputValue();
   const [loading, setLoading] = useState(false);
+  const [loadingValue, setLoadingValue] = useState(0);
   useEffect(() => {
     subscribeVideoLoaded((err, data) => {
+      console.log(data);
       props.setVideoInfo(data);
-      props.setLoading(false);
+      setLoading(false);
+    });
+    subscribeChumkVideoLoaded((err, data) => {
+      console.log(data);
+      setLoadingValue((data.downloaded * 100) / data.totallength);
     });
   }, []);
-  if (loading) {
-    return <h1>Loading...</h1>;
-  }
   return (
-    <GridList cols={2}>
-      <GridListTile actionPosition={"left"}>
-        <form>
-          <h3>Donwload video from Youtube</h3>
-          <label>
-            Youtube Url
-            <br />
-            <TextField
-              id="YoutubeUrl"
-              value={url.value}
-              onChange={url.onChange}
-            />
-          </label>
+    <div>
+      {loading && (
+        <div>
+          <LinearProgress variant="determinate" value={loadingValue} />
           <br />
-          <label>
-            Name of video
-            <br />
-            <TextField
-              id="YoutubeName"
-              value={name.value}
-              onChange={name.onChange}
-            />
-          </label>
-          <Button
-            primary={true}
-            onClick={() =>
-              send(
-                { url: url.value, name: name.value },
-                { loading, setLoading, ...props }
-              )
-            }
+        </div>
+      )}
+
+      <Grid
+        container={true}
+        alignContent="center"
+        alignItems="center"
+        justify="center"
+        sm="auto"
+        md="auto"
+        lg="auto"
+        spacing={1}
+      >
+        <Grid
+          alignContent="center"
+          alignItems="center"
+          justify="center"
+          item={true}
+        >
+          <Box minHeight="100vh">
+            <center>
+              <Typography variant="h4" component="h1">
+                Donwload video from Youtube
+              </Typography>
+
+              <br />
+              <TextField
+                label="Youtube Url"
+                id="YoutubeUrl"
+                value={url.value}
+                onChange={url.onChange}
+                required
+                variant="filled"
+              />
+              <br />
+              <br />
+              <TextField
+                label="Name of video"
+                id="YoutubeName"
+                value={name.value}
+                onChange={name.onChange}
+                required
+                variant="filled"
+              />
+              <br />
+              <br />
+              <Button
+                disabled={
+                  name.value && url.value ? (loading ? true : false) : true
+                }
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  if (name.value && url.value && !loading) {
+                    send(
+                      { url: url.value, name: name.value },
+                      { loading, setLoading, ...props }
+                    );
+                  }
+                }}
+              >
+                Start
+              </Button>
+            </center>
+          </Box>
+        </Grid>
+        {props.youtube && (
+          <Grid
+            alignContent="center"
+            alignItems="center"
+            justify="center"
+            item={true}
           >
-            Start
-          </Button>
-        </form>
-      </GridListTile>
-      <GridListTile actionPosition={"right"}>
-        <GridList cols={1}>
-          {props.youtube && (
             <div>
-              <GridListTile>
-                <img src={`/media/thumbs/${name}_1.png`} />
-              </GridListTile>
-              <GridListTile>
-                <img src={`/media/thumbs/${name}_2.png`} />
-              </GridListTile>
-              <GridListTile>
-                <img src={`/media/thumbs/${name}_3.png`} />
-              </GridListTile>
-              <GridListTile>
-                <a href={`/media/${name}.mp4`}>Mp4 Video Link</a>
-              </GridListTile>
+              <img src={`/media/thumbs/${name.value}_1.png`} />
+              <br />
+              <img src={`/media/thumbs/${name.value}_2.png`} />
+              <br />
+              <img src={`/media/thumbs/${name.value}_3.png`} />
+              <br />
+              <Button
+                variant="contained"
+                color="primary"
+                href={`/media/${name.value}.mp4`}
+              >
+                Mp4 Video Link
+              </Button>
             </div>
-          )}
-        </GridList>
-      </GridListTile>
-    </GridList>
+          </Grid>
+        )}
+      </Grid>
+    </div>
   );
 };
 

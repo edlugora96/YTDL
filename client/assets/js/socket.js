@@ -5,4 +5,8 @@ const subscribeVideoLoaded = cb => {
   socket.on("video_loaded", data => cb(null, data));
 };
 
-export { subscribeToTimer };
+const subscribeChumkVideoLoaded = cb => {
+  socket.on("chunk_video", data => cb(null, data));
+};
+
+export { subscribeVideoLoaded, subscribeChumkVideoLoaded };

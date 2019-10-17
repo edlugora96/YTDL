@@ -47,4 +47,4 @@ $ heroku buildpacks: add https://github.com/jonathanong/heroku-buildpack-ffmpeg-
 
 - Organize the index.js page in components
 - Add error handling to the form
-- Get videos with higher resolution
+- ~~Get videos with higher resolution~~

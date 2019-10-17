@@ -14,10 +14,14 @@ const ytdlApi = app => {
 
   router.post("/", async (req, res, next) => {
     const { body: data } = req;
+    res.header(
+      "Content-Disposition",
+      `attachment; filename=uploads/${data.name}.mp4`
+    );
     thumbs = [];
     try {
       await ytdl(data.url, {
-        quality: "highest"
+        quality: "highestvideo"
       })
         .on("progress", async (length, downloaded, totallength) => {
           socket.io.emit("chunk_video", { length, downloaded, totallength });

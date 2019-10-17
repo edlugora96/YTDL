@@ -11,7 +11,8 @@ import {
   Button,
   Typography,
   TextField,
-  Box
+  Box,
+  CircularProgress
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
@@ -24,6 +25,7 @@ const useStyles = makeStyles({
 
 const send = (data, props) => {
   props.setLoading(true);
+  props.setLoadingValue(0);
   props.setVideoInfo(null);
   fetch("/api/ytdl", {
     method: "POST",
@@ -110,12 +112,12 @@ const Home = props => {
                   if (name.value && url.value && !loading) {
                     send(
                       { url: url.value, name: name.value },
-                      { loading, setLoading, ...props }
+                      { loading, setLoading, setLoadingValue, ...props }
                     );
                   }
                 }}
               >
-                Start
+                {loading ? <CircularProgress color="secondary" /> : "Start"}
               </Button>
             </center>
           </Box>

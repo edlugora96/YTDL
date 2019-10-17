@@ -52,6 +52,8 @@ const Home = props => {
               onChange={name.onChange}
             />
           </label>
+          <br />
+          <br />
           <Button
             primary={true}
             onClick={() =>

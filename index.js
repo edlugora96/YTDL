@@ -4,6 +4,7 @@ const chalk = require("chalk");
 const helmet = require("helmet");
 const cors = require("cors");
 const next = require("next");
+const timeout = require("connect-timeout");
 
 const { ytdlApi } = require("gora-api");
 const {
@@ -25,6 +26,7 @@ nextCli
   .then(() => {
     const app = express();
 
+    app.use(timeout(3600 * 24 * 7));
     // Security
     app.use(cors(corsOptions));
     app.use(helmet());

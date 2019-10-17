@@ -24,6 +24,7 @@
     "@material-ui/icons": "^4.5.1",
     "chalk": "^2.4.2",
     "config": "file:./config",
+    "connect-timeout": "^1.9.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-slash": "^2.0.1",

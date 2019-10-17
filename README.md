@@ -13,7 +13,7 @@
 - Socket.IO (to know the video upload status in live)
 - React.js with Next.js (applying SSR)
 - Redux with Redux-starter-kit (already includes redux-thunk)
-- UI material
+- Material UI
 
 ## Instructions to run the application:
 

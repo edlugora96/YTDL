@@ -33,7 +33,7 @@ $ npm run dev
 $ npm run start
 ```
 
-### Heroku
+### Heroku:
 
 To deploy in Heroku you have to add the ffmpeg buildpack:
 

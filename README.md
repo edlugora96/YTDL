@@ -26,6 +26,8 @@ https://www.ffmpeg.org/
 $ git clone https://github.com/edlugora96/YTDL
 
 $ cd YTDL
+$ npm i
+
 // Dev
 $ npm run dev
 

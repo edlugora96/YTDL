@@ -8,9 +8,9 @@
 ## Technology used:
 
 - Node.js with express.js
-- Ffmpeg (to manipulate the video and extract the thumbs)
-- YTDL (to download the YouTube video)
-- Socket.IO (to know the video upload status in live)
+- Ffmpeg (for manipulate the video and extract the thumbs)
+- YTDL (for downloading the YouTube video)
+- Socket.IO (for know the video upload status in live)
 - React.js with Next.js (applying SSR)
 - Redux with Redux-starter-kit (already includes redux-thunk)
 - Material UI
